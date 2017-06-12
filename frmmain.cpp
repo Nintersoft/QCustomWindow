@@ -74,7 +74,7 @@ void frmMain::undefMouseMoveEvent(QObject* object, QMouseEvent* event){
             break;
         case LockMoveType::BottomRight:
             this->setGeometry(QRect(this->geometry().topLeft(),
-                                    QPoint(this->geometry().right() - posCursor.x(), this->geometry().bottom() - posCursor.y())));
+                                    QPoint(event->globalPos().x() - posCursor.x(), event->globalPos().y() - posCursor.y())));
             break;
         case LockMoveType::Left:
             this->setGeometry(QRect(QPoint(event->globalPos().x() - posCursor.x(), this->geometry().top()),
