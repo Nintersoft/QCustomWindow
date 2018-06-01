@@ -1,9 +1,20 @@
-#include "frmmain.h"
-#include "ui_frmmain.h"
+/*-------------------------------------------------
+#
+# Project developed by Nintersoft team
+# Developer: Mauro Mascarenhas de Araújo
+# Contact: mauro.mascarenhas@nintersoft.com
+# License: Nintersoft Open Source Code Licence
+# Date: 31 of May of 2018
+#
+------------------------------------------------- */
 
-frmMain::frmMain(QWidget *parent) :
+#include "nmainwindow.h"
+#include "ui_nmainwindow.h"
+
+NMainWindow::NMainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::frmMain)
+    ui(new Ui::NMainWindow),
+    RESIZE_LIMIT(2)
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
@@ -17,27 +28,74 @@ frmMain::frmMain(QWidget *parent) :
 
     setWindowTitle("Custom Window Border");
     locked = LockMoveType::None;
+
+    ui->headerWidget->setTitleBarWidget(ui->titleBar);
+    if (ui->titleBar->mainWindow() != this)
+        ui->titleBar->setMainWindow(this);
+
+    if (this->maximumSize() == this->minimumSize())
+        setMaximizeButtonEnabled(false);
+
+    /*
+     *  End of non client area implementation
+     */
 }
 
-frmMain::~frmMain()
+NMainWindow::~NMainWindow()
 {
     delete ui;
 }
 
-void frmMain::mousePressEvent(QMouseEvent *event)
+void NMainWindow::setCustomWidgets(QWidget *newCentralWidget, QStatusBar *newStatusBar){
+    setCustomStatusBar(newStatusBar);
+    setNewCentralWidget(newCentralWidget);
+}
+
+void NMainWindow::setCustomStatusBar(QStatusBar *newStatusBar){
+    if (!newStatusBar) return;
+    newStatusBar->installEventFilter(this);
+    newStatusBar->setMouseTracking(true);
+}
+
+void NMainWindow::setNewCentralWidget(QWidget *newCentralWidget){
+    if (!newCentralWidget) return;
+    newCentralWidget->installEventFilter(this);
+    newCentralWidget->setMouseTracking(true);
+
+    if (newCentralWidget->layout())
+        newCentralWidget->layout()->setContentsMargins(10, 0, 10, 0);
+}
+
+void NMainWindow::setCloseButtonEnabled(bool enable){
+    ui->titleBar->setCloseButtonEnabled(enable);
+}
+
+void NMainWindow::setMaximizeButtonEnabled(bool enable){
+    ui->titleBar->setMaximizeButtonEnabled(enable);
+}
+
+void NMainWindow::setMinimizeButtonEnabled(bool enable){
+    ui->titleBar->setMinimizeButtonEnabled(enable);
+}
+
+/*
+ * GUI Functions (do not change them, unless its really necessary)
+ */
+
+void NMainWindow::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        int x = event->x(), y = event->y(), bottom = this->height() - 5, right = this->width() - 5;
-        if (x < 5 && y < 5){
+        int x = event->x(), y = event->y(), bottom = this->height() - RESIZE_LIMIT, right = this->width() - RESIZE_LIMIT;
+        if (x < RESIZE_LIMIT && y < RESIZE_LIMIT){
             posCursor = event->globalPos() - this->geometry().topLeft();
             locked = LockMoveType::TopLeft;
         }
-        else if (x < 5 && y > bottom){
+        else if (x < RESIZE_LIMIT && y > bottom){
             posCursor = event->globalPos() - this->geometry().bottomLeft();
             locked = LockMoveType::BottomLeft;
         }
-        else if (x > right && y < 5){
+        else if (x > right && y < RESIZE_LIMIT){
             posCursor = event->globalPos() - this->geometry().topRight();
             locked = LockMoveType::TopRight;
         }
@@ -45,9 +103,9 @@ void frmMain::mousePressEvent(QMouseEvent *event)
             posCursor = event->globalPos() - this->geometry().bottomRight();
             locked = LockMoveType::BottomRight;
         }
-        else if (x < 5 || y < 5){
+        else if (x < RESIZE_LIMIT || y < RESIZE_LIMIT){
             posCursor = event->globalPos() - this->geometry().topLeft();
-            locked = x < 5 ? LockMoveType::Left : LockMoveType::Top;
+            locked = x < RESIZE_LIMIT ? LockMoveType::Left : LockMoveType::Top;
         }
         else if (x > right || y > bottom){
             posCursor = event->globalPos() - this->geometry().bottomRight();
@@ -57,7 +115,7 @@ void frmMain::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void frmMain::undefMouseMoveEvent(QObject* object, QMouseEvent* event){
+void NMainWindow::undefMouseMoveEvent(QObject* object, QMouseEvent* event){
     if (locked != LockMoveType::None){
         switch (locked) {
         case LockMoveType::TopLeft:
@@ -96,36 +154,36 @@ void frmMain::undefMouseMoveEvent(QObject* object, QMouseEvent* event){
         return;
     }
 
-    int x = event->x(), y = event->y(), right = this->width() - 5;
+    int x = event->x(), y = event->y(), right = this->width() - RESIZE_LIMIT;
     if (object->objectName() == "statusBar"){
-        if (x < 5 && y > 14){
+        if (x < RESIZE_LIMIT && y > (19 - RESIZE_LIMIT)){
             this->setCursor(QCursor(Qt::SizeBDiagCursor));
             return;
         }
-        else if (x > right && y > 14){
+        else if (x > right && y > (19 - RESIZE_LIMIT)){
             this->setCursor(QCursor(Qt::SizeFDiagCursor));
             return;
         }
-        else if (y > 14){
+        else if (y > (19 - RESIZE_LIMIT)){
             this->setCursor(QCursor(Qt::SizeVerCursor));
             return;
         }
     }
     else if (object->objectName() == "titleBar"){
-        if (x < 5 && y < 5){
+        if (x < RESIZE_LIMIT && y < RESIZE_LIMIT){
             this->setCursor(QCursor(Qt::SizeFDiagCursor));
             return;
         }
-        if (x > right && y < 5){
+        if (x > right && y < RESIZE_LIMIT){
             this->setCursor(QCursor(Qt::SizeBDiagCursor));
             return;
         }
-        else if (y < 5){
+        else if (y < RESIZE_LIMIT){
             this->setCursor(QCursor(Qt::SizeVerCursor));
             return;
         }
     }
-    if (x < 5 || x > right){
+    if (x < RESIZE_LIMIT || x > right){
         this->setCursor(QCursor(Qt::SizeHorCursor));
     }
     else {
@@ -133,12 +191,12 @@ void frmMain::undefMouseMoveEvent(QObject* object, QMouseEvent* event){
     }
 }
 
-void frmMain::mouseReleaseEvent(QMouseEvent *event){
+void NMainWindow::mouseReleaseEvent(QMouseEvent *event){
     locked = LockMoveType::None;
     event->accept();
 }
 
-bool frmMain::eventFilter(QObject* object, QEvent* event)
+bool NMainWindow::eventFilter(QObject* object, QEvent* event)
 {
     if(event->type() == QEvent::MouseMove)
         undefMouseMoveEvent(object, static_cast<QMouseEvent*>(event));
