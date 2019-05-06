@@ -11,9 +11,10 @@
 #ifndef TITLEBAR_H
 #define TITLEBAR_H
 
-#include <QWidget>
+#include <QStyleOption>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QWidget>
 
 namespace Ui {
 class TitleBar;
