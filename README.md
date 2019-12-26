@@ -13,7 +13,7 @@ Você poderá obter o suporte e documentação para o uso deste projeto em sua [
 - Atualização do título da janela (QMainWindow::setWindowTitle(QString)) funcionando;
 
 Código aberto CustomTitlebar
-- Você poderá baixar e fazer suas modificações à vontade, conforme a licença de código Mozilla v2.0.
+- Você poderá baixar e fazer suas modificações à vontade, conforme a Licença Pública Mozilla (MPL) v2.0.
 - A licença está disponível na raiz da pasta do projeto.
 
 Caso importe este repositório para seu Git, por favor coloque um link para nossa página e as referências cabíveis à nossa equipe, além de manter o README original.
