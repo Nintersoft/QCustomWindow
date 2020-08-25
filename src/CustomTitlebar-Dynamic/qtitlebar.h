@@ -17,6 +17,14 @@
 #ifndef QTITLEBAR_H
 #define QTITLEBAR_H
 
+#include <QtCore/qglobal.h>
+
+#if defined(QCUSTOMTITLEBAR_LIBRARY)
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QSize>
 #include <QEvent>
 #include <QLabel>
@@ -44,7 +52,7 @@ namespace QCustomAttrs {
     Q_DECLARE_OPERATORS_FOR_FLAGS(WindowButtons)
 }
 
-class QTitleBar : public QWidget
+class QCUSTOMTITLEBARSHARED_EXPORT QTitleBar : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(QCustomAttrs::WindowButtons windowButtons READ windowButtons WRITE setWindowButtons)

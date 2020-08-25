@@ -17,6 +17,14 @@
 #ifndef QCUSTOMWINDOW_H
 #define QCUSTOMWINDOW_H
 
+#include <QtCore/qglobal.h>
+
+#if defined(QCUSTOMTITLEBAR_LIBRARY)
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
 #include <QMenu>
 #include <QRect>
 #include <QPoint>
@@ -35,7 +43,7 @@
 
 #include "qtitlebar.h"
 
-class QCustomWindow : public QMainWindow
+class QCUSTOMTITLEBARSHARED_EXPORT QCustomWindow : public QMainWindow
 {
     Q_OBJECT
 

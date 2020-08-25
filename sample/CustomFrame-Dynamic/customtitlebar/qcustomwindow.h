@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 24 of August of 2020
 #
 # Licence notice
 #
@@ -16,6 +16,14 @@
 
 #ifndef QCUSTOMWINDOW_H
 #define QCUSTOMWINDOW_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QCUSTOMTITLEBAR_LIBRARY)
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_IMPORT
+#endif
 
 #include <QMenu>
 #include <QRect>
@@ -35,7 +43,7 @@
 
 #include "qtitlebar.h"
 
-class QCustomWindow : public QMainWindow
+class QCUSTOMTITLEBARSHARED_EXPORT QCustomWindow : public QMainWindow
 {
     Q_OBJECT
 

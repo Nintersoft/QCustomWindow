@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 24 of August of 2020
 #
 # Licence notice
 #
@@ -16,6 +16,14 @@
 
 #ifndef QTITLEBAR_H
 #define QTITLEBAR_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QCUSTOMTITLEBAR_LIBRARY)
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_IMPORT
+#endif
 
 #include <QSize>
 #include <QEvent>
@@ -44,7 +52,7 @@ namespace QCustomAttrs {
     Q_DECLARE_OPERATORS_FOR_FLAGS(WindowButtons)
 }
 
-class QTitleBar : public QWidget
+class QCUSTOMTITLEBARSHARED_EXPORT QTitleBar : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(QCustomAttrs::WindowButtons windowButtons READ windowButtons WRITE setWindowButtons)
