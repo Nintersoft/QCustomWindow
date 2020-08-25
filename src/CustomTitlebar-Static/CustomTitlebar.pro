@@ -35,13 +35,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        titlebar.cpp \
-        nmainwindow.cpp
+        qcustomwindow.cpp \
+        qtitlebar.cpp
 
 HEADERS += \
-         titlebar.h \
-         nmainwindow.h
-
-FORMS += \
-        titlebar.ui \
-        nmainwindow.ui
+    qcustomwindow.h \
+    qtitlebar.h

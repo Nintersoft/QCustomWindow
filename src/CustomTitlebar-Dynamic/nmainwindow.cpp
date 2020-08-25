@@ -102,7 +102,7 @@ void NMainWindow::closeEvent(QCloseEvent *event){
 void NMainWindow::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
-    {
+    {        
         int x = event->x(), y = event->y(), bottom = this->height() - RESIZE_LIMIT, right = this->width() - RESIZE_LIMIT;
         if (x < RESIZE_LIMIT && y < RESIZE_LIMIT){
             posCursor = event->globalPos() - this->geometry().topLeft();

@@ -19,13 +19,13 @@
 
 #include <QMainWindow>
 
-#include "nmainwindow.h"
+#include "qcustomwindow.h"
 
 namespace Ui {
 class TestWindow;
 }
 
-class TestWindow : public NMainWindow
+class TestWindow : public QCustomWindow
 {
     Q_OBJECT
 
