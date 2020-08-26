@@ -29,9 +29,9 @@ Should you have any doubts, do not hesitate in contacting me through [my email](
 
 ## Distribution (available versions):
 
--[X] DLL + LIB + headers;
--[X] Stactic linking/source files;
--[ ] Qt Creator/Designer plugin;
+- [x] DLL + LIB + headers;
+- [x] Stactic linking/source files;
+- [ ] Qt Creator/Designer plugin;
 
 ## CustomTitlebar open source code
 
