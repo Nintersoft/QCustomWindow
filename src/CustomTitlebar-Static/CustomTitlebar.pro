@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of December of 2019
+# 25 of August of 2020
 #
 # Licence notice
 #
@@ -35,13 +35,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        titlebar.cpp \
-        nmainwindow.cpp
+        qcustomwindow.cpp \
+        qtitlebar.cpp
 
 HEADERS += \
-         titlebar.h \
-         nmainwindow.h
-
-FORMS += \
-        titlebar.ui \
-        nmainwindow.ui
+    qcustomwindow.h \
+    qtitlebar.h

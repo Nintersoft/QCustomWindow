@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of December of 2019
+# Date: 25 of August of 2020
 #
 # Licence notice
 #
@@ -36,17 +36,14 @@ INCLUDEPATH += $$PWD/customtitlebar
 DEPENDPATH += $$PWD/customtitlebar
 
 SOURCES += \
-        customtitlebar/nmainwindow.cpp \
-        customtitlebar/titlebar.cpp \
+        customtitlebar/qcustomwindow.cpp \
+        customtitlebar/qtitlebar.cpp \
         testwindow.cpp \
         main.cpp
 
 HEADERS += \
-        customtitlebar/nmainwindow.h \
-        customtitlebar/titlebar.h \
+        customtitlebar/qcustomwindow.h \
+        customtitlebar/qtitlebar.h \
         testwindow.h
 
-FORMS += \
-        customtitlebar/nmainwindow.ui \
-        customtitlebar/titlebar.ui \
-        testwindow.ui
+FORMS += testwindow.ui

@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of December of 2019
+# Date: 25 of August of 2020
 #
 # Licence notice
 #
@@ -43,5 +43,5 @@ HEADERS += testwindow.h
 
 FORMS += testwindow.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/customtitlebar/ -lCustomTitlebar
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/customtitlebar/ -lCustomTitlebar
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/customtitlebar/ -lQCustomTitlebar
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/customtitlebar/ -lQCustomTitlebar

@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of December of 2019
+# Date: 25 of August of 2020
 #
 # Licence notice
 #
@@ -18,19 +18,22 @@
 #include "ui_testwindow.h"
 
 TestWindow::TestWindow(QWidget *parent) :
-    NMainWindow(parent),
+    QCustomWindow(parent),
     ui(new Ui::TestWindow)
 {
     ui->setupUi(this);
 
-    // Sets the custom Widgets on the parent Class
-    // Otherwise, the window resizing feature will not work
-    NMainWindow::setCustomWidgets(ui->centralWidget, ui->statusBar);
+    /*
+     * QMenuBar should never be inserted using Qt Designer.
+     * Insert them manually instead setMenuBar(QMenuBar*)
+     * and setMenuWidget(QWidget*) have been reimplemented.
+     */
 
     clicks = 0;
     connect(ui->pushButton, &QPushButton::clicked, [this]{
         setWindowTitle("Number of clicks : " + QString::number(++clicks));
     });
+    this->setMinimumSize(500, 400);
 }
 
 TestWindow::~TestWindow()

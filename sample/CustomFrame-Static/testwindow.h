@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of December of 2019
+# Date: 25 of August of 2020
 #
 # Licence notice
 #
@@ -19,13 +19,13 @@
 
 #include <QMainWindow>
 
-#include "nmainwindow.h"
+#include "qcustomwindow.h"
 
 namespace Ui {
 class TestWindow;
 }
 
-class TestWindow : public NMainWindow
+class TestWindow : public QCustomWindow
 {
     Q_OBJECT
 
