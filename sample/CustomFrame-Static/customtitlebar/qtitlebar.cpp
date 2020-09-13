@@ -45,7 +45,7 @@ QTitleBar::QTitleBar(QMainWindow *parent) :
         "QTitleBar { background: white; }\n"
     ));
 
-    if (!parent) throw std::exception("Parent must be a QCustomWindow object (cannot be null).");
+    if (!parent) throw std::invalid_argument("Parent must be a QCustomWindow object (cannot be null).");
     this->m_parentWindow = parent;
 
     this->lbl_windowTitle.setText("QCustomWindow");

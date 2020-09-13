@@ -30,7 +30,7 @@
 #include <QPushButton>
 #include <QStyleOption>
 
-#include <exception>
+#include <stdexcept>
 
 namespace QCustomAttrs {
     enum WindowButton {

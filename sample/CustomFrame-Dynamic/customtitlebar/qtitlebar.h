@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 24 of August of 2020
+# Date: 25 of August of 2020
 #
 # Licence notice
 #
@@ -38,7 +38,7 @@
 #include <QPushButton>
 #include <QStyleOption>
 
-#include <exception>
+#include <stdexcept>
 
 namespace QCustomAttrs {
     enum WindowButton {
