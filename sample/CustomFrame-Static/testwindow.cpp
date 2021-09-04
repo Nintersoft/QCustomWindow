@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 3 of September of 2021
 #
 # Licence notice
 #
@@ -21,13 +21,7 @@ TestWindow::TestWindow(QWidget *parent) :
     QCustomWindow(parent),
     ui(new Ui::TestWindow)
 {
-    ui->setupUi(this);
-
-    /*
-     * QMenuBar should never be inserted using Qt Designer.
-     * Insert them manually instead setMenuBar(QMenuBar*)
-     * and setMenuWidget(QWidget*) have been reimplemented.
-     */
+    ui->setupUi(this->mainWindow());
 
     clicks = 0;
     connect(ui->pushButton, &QPushButton::clicked, [this]{
