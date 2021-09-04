@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 3 of September of 2021
 #
 # Licence notice
 #
@@ -32,18 +32,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += $$PWD/customtitlebar
-DEPENDPATH += $$PWD/customtitlebar
+INCLUDEPATH += $$PWD/customwindow
+DEPENDPATH += $$PWD/customwindow
 
 SOURCES += \
-        customtitlebar/qcustomwindow.cpp \
-        customtitlebar/qtitlebar.cpp \
+        customwindow/qcustomwindow.cpp \
+        customwindow/qcustomtitlebar.cpp \
         testwindow.cpp \
         main.cpp
 
 HEADERS += \
-        customtitlebar/qcustomwindow.h \
-        customtitlebar/qtitlebar.h \
+        customwindow/qcustomwindow.h \
+        customwindow/qcustomtitlebar.h \
         testwindow.h
 
 FORMS += testwindow.ui

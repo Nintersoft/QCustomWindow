@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 30 of August of 2021
 #
 # Licence notice
 #
@@ -15,6 +15,7 @@
 ------------------------------------------------- */
 
 #include "qcustomwindow.h"
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -22,6 +23,5 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QCustomWindow w;
     w.show();
-
     return a.exec();
 }
