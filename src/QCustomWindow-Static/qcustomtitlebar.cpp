@@ -53,7 +53,6 @@ QCustomTitleBar::QCustomTitleBar(QWidget *parent) :
     this->btnMaximize.setText("+");
     this->btnMinimize.setText("-");
 
-    this->lblWindowIcon.setScaledContents(true);
     this->lblWindowIcon.setMaximumSize(FRAME_BUTTON_SIZE);
     this->lblWindowIcon.setMinimumSize(FRAME_BUTTON_SIZE);
     this->lblWindowIcon.setPixmap(this->windowIcon().pixmap(FRAME_BUTTON_SIZE));
