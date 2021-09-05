@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 5 of September of 2021
 #
 # Licence notice
 #
@@ -14,21 +14,23 @@
 #
 ------------------------------------------------- */
 
-#ifndef QTITLEBAR_H
-#define QTITLEBAR_H
+#ifndef QCUSTOMTITLEBAR_H
+#define QCUSTOMTITLEBAR_H
 
 #include <QtCore/qglobal.h>
 
-#if defined(QCUSTOMTITLEBAR_LIBRARY)
+#if defined(QCUSTOMWINDOW_LIBRARY)
 #  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_EXPORT
 #else
 #  define QCUSTOMTITLEBARSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
+#include <QIcon>
 #include <QSize>
 #include <QEvent>
 #include <QLabel>
 #include <QPoint>
+#include <QPixmap>
 #include <QWidget>
 #include <QPainter>
 #include <QMainWindow>
@@ -38,60 +40,59 @@
 #include <QPushButton>
 #include <QStyleOption>
 
-#include <stdexcept>
-
 namespace QCustomAttrs {
     enum WindowButton {
         Minimize = 0x01,
         Maximize = 0x02,
-        Close    = 0x04,
-        All      = Minimize | Maximize | Close
+        Close    = 0x04
     };
 
     Q_DECLARE_FLAGS(WindowButtons, WindowButton)
     Q_DECLARE_OPERATORS_FOR_FLAGS(WindowButtons)
 }
 
-class QCUSTOMTITLEBARSHARED_EXPORT QTitleBar : public QWidget
+class QCUSTOMTITLEBARSHARED_EXPORT QCustomTitleBar : public QWidget
 {
     Q_OBJECT
     Q_PROPERTY(QCustomAttrs::WindowButtons windowButtons READ windowButtons WRITE setWindowButtons)
-    Q_CLASSINFO("custom_obj_type", "QTitleBar")
+    Q_CLASSINFO("custom_obj_type", "QCustomTitleBar")
 public:
-    explicit QTitleBar(QMainWindow *parent = nullptr);
+    explicit QCustomTitleBar(QWidget *parent = nullptr);
 
     void setWindowButtons(QCustomAttrs::WindowButtons btns);
-    inline QCustomAttrs::WindowButtons windowButtons() const { return this->m_frameButtons; }
+    inline QCustomAttrs::WindowButtons windowButtons() const { return this->mFrameButtons; }
 
+    void setWindowButtonText(QCustomAttrs::WindowButton btn, const QString &text = "");
     void setWindowButtonEnabled(QCustomAttrs::WindowButton btn, bool enabled = true);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 private:
-    bool canMove;
-    bool maximizing;
-
-    QPoint m_pCursor;
+    QPoint mPCursor;
     const QSize FRAME_BUTTON_SIZE;
 
-    QWidget *m_parentWindow;
+    QCustomAttrs::WindowButtons mFrameButtons;
 
-    QCustomAttrs::WindowButtons m_frameButtons;
-
-    QLabel lbl_windowTitle;
-    QHBoxLayout m_layout;
-    QPushButton btn_minimize;
-    QPushButton btn_maximize;
-    QPushButton btn_close;
+    QLabel lblWindowIcon;
+    QLabel lblWindowTitle;
+    QHBoxLayout mLayout;
+    QPushButton btnMinimize;
+    QPushButton btnMaximize;
+    QPushButton btnClose;
 
 signals:
-    void requestClose();
-    void requestMaximize();
-    void requestMinimize();
+    void closeRequest();
+    void maximizeRequest();
+    void minimizeRequest();
+
+    void stopWindowMoveRequest();
+    void startWindowMoveRequest(const QPoint &start);
+    void changeWindowPositionRequest(const QPoint &to);
 };
 
-#endif // QTITLEBAR_H
+#endif // QCUSTOMTITLEBAR_H

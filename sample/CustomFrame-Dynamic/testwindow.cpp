@@ -4,8 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
-#
+# Date: 5 of September of 2021
 # Licence notice
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
@@ -17,24 +16,25 @@
 #include "testwindow.h"
 #include "ui_testwindow.h"
 
+#include <QtDebug>
 TestWindow::TestWindow(QWidget *parent) :
     QCustomWindow(parent),
     ui(new Ui::TestWindow)
 {
-    ui->setupUi(this);
+    ui->setupUi(this->mainWindow());
     // A simple test to check if QTitleBar has been successfully exported
-    this->titleBar().setWindowButtonEnabled(QCustomAttrs::Maximize, false);
-
-    /*
-     * QMenuBar should never be inserted using Qt Designer.
-     * Insert them manually instead setMenuBar(QMenuBar*)
-     * and setMenuWidget(QWidget*) have been reimplemented.
-     */
+    this->titleBar()->setWindowButtonEnabled(QCustomAttrs::Maximize, false);
 
     clicks = 0;
-    connect(ui->pushButton, &QPushButton::clicked, [this]{
+    connect(ui->pushButton, &QPushButton::clicked, this, [this]{
         setWindowTitle("Number of clicks : " + QString::number(++clicks));
     });
+
+    connect(ui->cbWindowIcon, &QCheckBox::toggled, this, [this](bool checked){
+        if (checked) this->setWindowIcon(QIcon(":/imgs/icon.png"));
+        else this->setWindowIcon(QIcon());
+    });
+
     this->setMinimumSize(500, 400);
 }
 

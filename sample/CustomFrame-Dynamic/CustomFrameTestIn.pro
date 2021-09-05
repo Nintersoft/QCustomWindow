@@ -32,8 +32,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += $$PWD/customtitlebar
-DEPENDPATH += $$PWD/customtitlebar
+INCLUDEPATH += $$PWD/customwindow
+DEPENDPATH += $$PWD/customwindow
 
 SOURCES += \
         main.cpp \
@@ -43,5 +43,8 @@ HEADERS += testwindow.h
 
 FORMS += testwindow.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/customtitlebar/ -lQCustomTitlebar
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/customtitlebar/ -lQCustomTitlebar
+RESOURCES += \
+    resources.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/customwindow/ -lQCustomWindow
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/customwindow/ -lQCustomWindow
