@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 3 of September of 2021
+# Date: 5 of September of 2021
 #
 # Licence notice
 #
@@ -24,10 +24,15 @@ TestWindow::TestWindow(QWidget *parent) :
     ui->setupUi(this->mainWindow());
 
     clicks = 0;
-    connect(ui->pushButton, &QPushButton::clicked, [this]{
+    connect(ui->pushButton, &QPushButton::clicked, this, [this]{
         setWindowTitle("Number of clicks : " + QString::number(++clicks));
     });
     this->setMinimumSize(500, 400);
+
+    connect(ui->cbWindowIcon, &QCheckBox::toggled, this, [this](bool checked){
+        if (checked) this->setWindowIcon(QIcon(":/imgs/icon.png"));
+        else this->setWindowIcon(QIcon());
+    });
 }
 
 TestWindow::~TestWindow()

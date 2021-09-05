@@ -17,6 +17,7 @@
 #ifndef TESTWINDOW_H
 #define TESTWINDOW_H
 
+#include <QIcon>
 #include <QMainWindow>
 
 #include "qcustomwindow.h"

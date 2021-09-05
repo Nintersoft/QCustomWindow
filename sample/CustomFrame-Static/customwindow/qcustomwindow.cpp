@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 30 of August of 2021
+# Date: 5 of September of 2021
 #
 # Licence notice
 #
@@ -20,7 +20,8 @@ QCustomWindow::QCustomWindow(QWidget *parent)
     : QWidget(parent), RESIZE_THRESHOLD(4), CLIENT_MARGIN(8)
 {
     this->setAttribute(Qt::WA_NativeWindow);
-    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint
+                          | Qt::WindowTitleHint);
     this->setWindowTitle("QCustomWindow");
 
     this->cOpStatus = OperationType::NONE;
@@ -70,6 +71,7 @@ QCustomWindow::~QCustomWindow()
 
 void QCustomWindow::setTitleBar(QCustomTitleBar *tb){
     tb->setParent(this);
+    tb->setWindowIcon(this->windowIcon());
     tb->setWindowTitle(this->windowTitle());
 
     connect(tb, &QCustomTitleBar::closeRequest, this, &QCustomWindow::close);
@@ -97,9 +99,11 @@ void QCustomWindow::setTitleBar(QCustomTitleBar *tb){
         }
     });
 
+    connect(this, &QMainWindow::windowIconChanged, tb, &QWidget::setWindowIcon);
     connect(this, &QMainWindow::windowTitleChanged, tb, &QWidget::setWindowTitle);
 
     this->privLayout->insertWidget(0, tb);
+    this->privTitleBar = tb;
 }
 
 bool QCustomWindow::eventFilter(QObject *, QEvent *event){
@@ -122,6 +126,7 @@ bool QCustomWindow::eventFilter(QObject *, QEvent *event){
 }
 
 void QCustomWindow::mousePressEvent(QMouseEvent *event){
+    this->redefineCursor(event->globalPos());
     if (event->button() & Qt::LeftButton && this->mLock){
         if (!this->forceCustomResize && this->windowHandle()->startSystemResize(this->mLock))
             this->cOpStatus = OperationType::SYSTEM_RESIZE;
