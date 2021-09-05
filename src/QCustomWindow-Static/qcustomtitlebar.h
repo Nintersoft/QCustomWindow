@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 30 of August of 2021
+# Date: 5 of September of 2021
 #
 # Licence notice
 #
@@ -17,10 +17,12 @@
 #ifndef QCUSTOMTITLEBAR_H
 #define QCUSTOMTITLEBAR_H
 
+#include <QIcon>
 #include <QSize>
 #include <QEvent>
 #include <QLabel>
 #include <QPoint>
+#include <QPixmap>
 #include <QWidget>
 #include <QPainter>
 #include <QMainWindow>
@@ -29,8 +31,6 @@
 #include <QPaintEvent>
 #include <QPushButton>
 #include <QStyleOption>
-
-#include <stdexcept>
 
 namespace QCustomAttrs {
     enum WindowButton {
@@ -68,10 +68,9 @@ private:
     QPoint mPCursor;
     const QSize FRAME_BUTTON_SIZE;
 
-    QWidget *mParentWindow;
-
     QCustomAttrs::WindowButtons mFrameButtons;
 
+    QLabel lblWindowIcon;
     QLabel lblWindowTitle;
     QHBoxLayout mLayout;
     QPushButton btnMinimize;

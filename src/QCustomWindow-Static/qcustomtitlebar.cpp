@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 30 of August of 2021
+# Date: 5 of September of 2021
 #
 # Licence notice
 #
@@ -40,11 +40,11 @@ QCustomTitleBar::QCustomTitleBar(QWidget *parent) :
         "   border : 0.5px solid orange;\n"
         "   color: white;\n"
         "}\n"
+        "QLabel#lblWindowTitle {\n"
+        "   margin-left: 8px;\n"
+        "}\n"
         "QCustomTitleBar { background: white; }\n"
     ));
-
-    if (!parent) throw std::invalid_argument("Parent must be a QCustomWindow object (cannot be null).");
-    this->mParentWindow = parent;
 
     this->lblWindowTitle.setText("QCustomWindow");
     this->lblWindowTitle.setAlignment(Qt::AlignCenter);
@@ -53,9 +53,16 @@ QCustomTitleBar::QCustomTitleBar(QWidget *parent) :
     this->btnMaximize.setText("+");
     this->btnMinimize.setText("-");
 
+    this->lblWindowIcon.setScaledContents(true);
+    this->lblWindowIcon.setMaximumSize(FRAME_BUTTON_SIZE);
+    this->lblWindowIcon.setMinimumSize(FRAME_BUTTON_SIZE);
+    this->lblWindowIcon.setPixmap(this->windowIcon().pixmap(FRAME_BUTTON_SIZE));
+
     this->btnClose.setObjectName("btnClose");
     this->btnMaximize.setObjectName("btnMaximize");
     this->btnMinimize.setObjectName("btnMinimize");
+    this->lblWindowIcon.setObjectName("lblWindowIcon");
+    this->lblWindowTitle.setObjectName("lblWindowTitle");
 
     this->btnClose.setMaximumSize(FRAME_BUTTON_SIZE);
     this->btnClose.setMinimumSize(FRAME_BUTTON_SIZE);
@@ -64,6 +71,7 @@ QCustomTitleBar::QCustomTitleBar(QWidget *parent) :
     this->btnMinimize.setMaximumSize(FRAME_BUTTON_SIZE);
     this->btnMinimize.setMinimumSize(FRAME_BUTTON_SIZE);
 
+    this->mLayout.addWidget(&this->lblWindowIcon);
     this->mLayout.addWidget(&this->lblWindowTitle, 1);
     this->mLayout.addWidget(&this->btnMinimize);
     this->mLayout.addWidget(&this->btnMaximize);
@@ -78,6 +86,10 @@ QCustomTitleBar::QCustomTitleBar(QWidget *parent) :
     connect(&this->btnMaximize, &QPushButton::clicked, this, [this]{ emit this->maximizeRequest(); });
 
     connect(this, &QWidget::windowTitleChanged, &this->lblWindowTitle, &QLabel::setText);
+    connect(this, &QWidget::windowIconChanged, this, [this](const QIcon &icon){
+        this->lblWindowIcon.setPixmap(icon.pixmap(FRAME_BUTTON_SIZE));
+        this->lblWindowIcon.setVisible(!icon.isNull());
+    });
 
     this->setMaximumHeight(35);
     this->setMinimumHeight(35);
