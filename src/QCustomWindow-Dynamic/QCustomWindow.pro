@@ -1,10 +1,10 @@
-#-------------------------------------------------
+# -------------------------------------------------
 #
 # Project developed by Nintersoft team
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 25 of August of 2020
+# Date: 04 of September of 2021
 #
 # Licence notice
 #
@@ -12,31 +12,31 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 #
-#-------------------------------------------------
+# -------------------------------------------------
 
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QCustomTitlebar
+TARGET = QCustomWindow
 TEMPLATE = lib
 
 win32 {
-    VERSION = 2.0.0.7
+    VERSION = 3.0.1
 
     QMAKE_TARGET_COMPANY = Nintersoft
-    QMAKE_TARGET_PRODUCT = Custom Titlebar
-    QMAKE_TARGET_DESCRIPTION = Custom Titlebar
-    QMAKE_TARGET_COPYRIGHT = Copyright (c) 2019 - Nintersoft
+    QMAKE_TARGET_PRODUCT = QCustomWindow
+    QMAKE_TARGET_DESCRIPTION = QCustomWindow
+    QMAKE_TARGET_COPYRIGHT = Copyright (c) 2021 - Nintersoft
 
     CONFIG += skip_target_version_ext
 }
 else {
-    VERSION = 2.0.0
+    VERSION = 3.0.1
     CONFIG += unversioned_libname
 }
 
-DEFINES += QCUSTOMTITLEBAR_LIBRARY
+DEFINES += QCUSTOMWINDOW_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -51,11 +51,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        qtitlebar.cpp \
+        qcustomtitlebar.cpp \
         qcustomwindow.cpp
 
 HEADERS += \
-         qtitlebar.h \
+         qcustomtitlebar.h \
          qcustomwindow.h
 
 unix {
