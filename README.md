@@ -34,6 +34,7 @@ Should you have any doubts, do not hesitate in contacting me through [my email](
 ## Features:
 
 - Dynamic pointer styles;
+- Compatible with Qt5 and Qt6;
 - Customized stylesheet (light theme);
 - Uses new QWindow's [move](https://doc.qt.io/qt-5/qwindow.html#startSystemMove)/[resize](https://doc.qt.io/qt-5/qwindow.html#startSystemResize) API by default (use QCustomWindow::setForceCustomMove(bool) and QCustomWindow::setForceCustomResize(bool) so as to change behaviour);
 - Window title update ([QWidget::setWindowTitle(QString)](https://doc.qt.io/qt-6/qwidget.html#windowTitle-prop)) working properly;
