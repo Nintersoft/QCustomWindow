@@ -4,21 +4,25 @@ QCustomWindow (former QCustomTitlebar) is a project in which its main class (QCu
 
 It basically consists of a customized widget providing a customized non-client area which wraps a [QMainWindow](https://doc.qt.io/qt-6/qmainwindow.html), as represented in the following image:
 
-<p align="center">
-  <figure>
-	<img src="docs/imgs/layout/QCustomWindow_Layout.png" alt="QCustomWindow simplified layout">
-	<figcaption>Fig. 1: QCustomWindow simplified layout.</figcaption>
-  </figure>  
-</p>
+<div align="center">
+	<p>
+		<figure>
+			<img src="docs/imgs/layout/QCustomWindow_Layout.png" alt="QCustomWindow simplified layout"><br />
+			<figcaption>Fig. 1: QCustomWindow simplified layout.</figcaption>
+		</figure>
+	</p>
+</div>
 
 ## Screenshot
 
-<p align="center">
-  <figure>
-	<img src="docs/imgs/screenshots/winNormal.png" alt="Regular-sized custom window in light theme">
-	<figcaption>Fig. 2: Regular-sized custom window in light theme.</figcaption>
-  </figure>  
-</p>
+<div align="center">
+	<p>
+		<figure>
+			<img src="docs/imgs/screenshots/winNormal.png" alt="Regular-sized custom window in light theme"><br />
+			<figcaption>Fig. 2: Regular-sized custom window in light theme.</figcaption>
+		</figure>  
+	</p>
+</div>
 
 Please, refer to [screenshots](docs/imgs/screenshots) for more images.
 
