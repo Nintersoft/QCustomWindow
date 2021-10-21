@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 30 of August of 2021
+# Date: 31 of October of 2021
 #
 # Licence notice
 #
@@ -22,6 +22,7 @@
 #include <QTimer>
 #include <QPoint>
 #include <QStyle>
+#include <QPointF>
 #include <QObject>
 #include <QWidget>
 #include <QCursor>
@@ -29,6 +30,7 @@
 #include <QMenuBar>
 #include <QPainter>
 #include <QToolBar>
+#include <QtGlobal>
 #include <QStatusBar>
 #include <QSizePolicy>
 #include <QMetaMethod>

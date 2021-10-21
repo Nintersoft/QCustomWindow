@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 5 of September of 2021
+# Date: 31 of October of 2021
 #
 # Licence notice
 #
@@ -118,12 +118,12 @@ void QCustomTitleBar::setWindowButtonEnabled(QCustomAttrs::WindowButton btn, boo
 }
 
 void QCustomTitleBar::mouseMoveEvent(QMouseEvent *event){
-    if (event->buttons() & Qt::LeftButton) emit changeWindowPositionRequest(event->globalPos());
+    if (event->buttons() & Qt::LeftButton) emit changeWindowPositionRequest(EV_GLOBAL_POS(event));
     QWidget::mouseMoveEvent(event);
 }
 
 void QCustomTitleBar::mousePressEvent(QMouseEvent *event){
-    if (event->button() & Qt::LeftButton) emit startWindowMoveRequest(event->globalPos());
+    if (event->button() & Qt::LeftButton) emit startWindowMoveRequest(EV_GLOBAL_POS(event));
     QWidget::mousePressEvent(event);
 }
 

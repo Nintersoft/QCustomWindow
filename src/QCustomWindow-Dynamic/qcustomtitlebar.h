@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 5 of September of 2021
+# Date: 31 of October of 2021
 #
 # Licence notice
 #
@@ -30,15 +30,30 @@
 #include <QEvent>
 #include <QLabel>
 #include <QPoint>
+#include <QPointF>
 #include <QPixmap>
 #include <QWidget>
 #include <QPainter>
+#include <QtGlobal>
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPushButton>
 #include <QStyleOption>
+
+#ifndef EV_GLOBAL_MACRO
+    #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        #define EV_GLOBAL_X(event) event->globalX()
+        #define EV_GLOBAL_Y(event) event->globalY()
+        #define EV_GLOBAL_POS(event) event->globalPos()
+    #else
+        #define EV_GLOBAL_X(event) event->globalPosition().toPoint().x()
+        #define EV_GLOBAL_Y(event) event->globalPosition().toPoint().y()
+        #define EV_GLOBAL_POS(event) event->globalPosition().toPoint()
+    #endif
+    #define EV_GLOBAL_MACRO
+#endif
 
 namespace QCustomAttrs {
     enum WindowButton {

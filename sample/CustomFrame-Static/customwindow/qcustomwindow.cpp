@@ -4,7 +4,7 @@
 # Developer: Mauro Mascarenhas de Araújo
 # Contact: mauro.mascarenhas@nintersoft.com
 # Licence: Mozilla Public Licence 2.0
-# Date: 5 of September of 2021
+# Date: 31 of October of 2021
 #
 # Licence notice
 #
@@ -118,7 +118,7 @@ bool QCustomWindow::eventFilter(QObject *, QEvent *event){
     case QEvent::MouseMove:
         if (this->cOpStatus & OperationType::CUSTOM_RESIZE)
             customMouseMoveEvent(static_cast<QMouseEvent*>(event));
-        else if (!this->isMoving()) redefineCursor(static_cast<QMouseEvent*>(event)->globalPos());
+        else if (!this->isMoving()) redefineCursor(EV_GLOBAL_POS(static_cast<QMouseEvent*>(event)));
         break;
     default: break;
     }
@@ -126,12 +126,12 @@ bool QCustomWindow::eventFilter(QObject *, QEvent *event){
 }
 
 void QCustomWindow::mousePressEvent(QMouseEvent *event){
-    this->redefineCursor(event->globalPos());
+    this->redefineCursor(EV_GLOBAL_POS(event));
     if (event->button() & Qt::LeftButton && this->mLock){
         if (!this->forceCustomResize && this->windowHandle()->startSystemResize(this->mLock))
             this->cOpStatus = OperationType::SYSTEM_RESIZE;
         else {
-            QPoint posCursor = event->globalPos();
+            QPoint posCursor = EV_GLOBAL_POS(event);
             if (this->mLock & Qt::TopEdge) posCursor.ry() -= this->y();
             if (this->mLock & Qt::LeftEdge) posCursor.rx() -= this->x();
             if (this->mLock & Qt::RightEdge) posCursor.rx() -= (this->x() + this->width());
@@ -144,12 +144,12 @@ void QCustomWindow::mousePressEvent(QMouseEvent *event){
 
 void QCustomWindow::mouseReleaseEvent(QMouseEvent *event){
     this->cOpStatus = OperationType::NONE;
-    this->redefineCursor(event->globalPos());
+    this->redefineCursor(EV_GLOBAL_POS(event));
     QWidget::mouseReleaseEvent(event);
 }
 
 void QCustomWindow::customMouseMoveEvent(QMouseEvent *event){
-    int gX = event->globalX(), gY = event->globalY();
+    int gX = EV_GLOBAL_X(event), gY = EV_GLOBAL_Y(event);
     QPoint tL = this->geometry().topLeft(), bR = this->geometry().bottomRight();
 
     bool cRH = bR.x() - tL.x() > this->minimumWidth();
